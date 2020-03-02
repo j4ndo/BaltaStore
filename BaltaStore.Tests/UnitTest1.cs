@@ -21,15 +21,19 @@ namespace BaltaStore.Tests
         var cadeira = new Product("Cadeira","Cadeira","image.png", 559.99M, 10);
             
         var order = new Order(c);
-        order.AddItem(new OrderItem(mouse, 5));
-        order.AddItem(new OrderItem(teclado, 5));
-        order.AddItem(new OrderItem(impressora, 5));
-        order.AddItem(new OrderItem(cadeira, 5));
+        //order.AddItem(new OrderItem(mouse, 5));
+        //order.AddItem(new OrderItem(teclado, 5));
+        //order.AddItem(new OrderItem(impressora, 5));
+        //order.AddItem(new OrderItem(cadeira, 5));
 
         // Realiza Pedido
         order.Place();
+        var n = order.Notifications;
+        // Paga o Pedido
         order.Pay();
+        // Envia o Pedido
         order.Ship();
+        // Cancela o Pedido
         order.Cancel();
         }
     }

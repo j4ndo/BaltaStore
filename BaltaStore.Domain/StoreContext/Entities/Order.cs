@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using BaltaStore.Domain.StoreContext.Enums;
-
+using FluentValidator;
 
 namespace BaltaStore.Domain.StoreContext.Entities
 {
-    public class Order
+    public class Order: Notifiable
     {
         private readonly IList<OrderItem> _items;
         private readonly IList<Delivery> _deliveries;
@@ -35,7 +35,9 @@ namespace BaltaStore.Domain.StoreContext.Entities
         // Criar um Pedido
         public void Place() {
             // Gerar o número do Pedido
-            Number = Guid.NewGuid().ToString().Replace("-", "").Substring(0,8);            
+            Number = Guid.NewGuid().ToString().Replace("-", "").Substring(0,8);
+            if (_items.Count == 0)
+                AddNotification("Order", "Este pedido não possui itens.");            
         }        
         // Pagar um Pedido
         public void Pay()
